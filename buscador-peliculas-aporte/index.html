@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CineFlick - Busqueda y recomendacion de peliculas y series con estilo premium."
+    />
+    <title>CineFlick | Streaming Discovery</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cineBlack: "#0b0b0b",
+              cineDark: "#141414",
+              cineRed: "#e50914",
+              cineGray: "#b3b3b3",
+            },
+            boxShadow: {
+              glow: "0 0 25px rgba(229, 9, 20, 0.35)",
+            },
+            keyframes: {
+              fadeUp: {
+                "0%": { opacity: "0", transform: "translateY(24px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              pulseSoft: {
+                "0%, 100%": { opacity: "0.4" },
+                "50%": { opacity: "1" },
+              },
+              spinSlow: {
+                "0%": { transform: "rotate(0deg)" },
+                "100%": { transform: "rotate(360deg)" },
+              },
+            },
+            animation: {
+              fadeUp: "fadeUp 0.8s ease-out forwards",
+              pulseSoft: "pulseSoft 2s ease-in-out infinite",
+              spinSlow: "spinSlow 1s linear infinite",
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-cineBlack text-white antialiased selection:bg-cineRed selection:text-white">
+    <!-- Loader pantalla completa -->
+    <div
+      id="loaderOverlay"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-cineBlack/95 backdrop-blur-sm transition-opacity duration-500"
+      role="status"
+      aria-live="polite"
+      aria-label="Cargando aplicacion"
+    >
+      <div class="flex flex-col items-center gap-4">
+        <div class="h-14 w-14 rounded-full border-4 border-cineGray/20 border-t-cineRed animate-spinSlow"></div>
+        <p class="text-sm tracking-[0.28em] text-cineGray uppercase animate-pulseSoft">Cargando CineFlick</p>
+      </div>
+    </div>
+
+    <!-- Navbar principal -->
+    <header
+      id="mainNavbar"
+      class="fixed top-0 z-50 w-full border-b border-white/10 bg-cineBlack/70 backdrop-blur-md transition-all duration-300"
+    >
+      <nav class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
+        <a href="#inicio" class="shrink-0 text-xl font-bold tracking-wide md:text-2xl">
+          <span class="text-cineRed">🎬</span> CineFlick
+        </a>
+
+        <div class="hidden flex-1 items-center gap-3 md:flex">
+          <label for="searchInput" class="sr-only">Buscar</label>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Busca peliculas, series o actores..."
+            class="w-full rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm outline-none transition focus:border-cineRed focus:ring-2 focus:ring-cineRed/30"
+          />
+          <button
+            id="searchButton"
+            class="rounded-full bg-cineRed px-5 py-2.5 text-sm font-semibold transition hover:scale-105 hover:bg-red-600 hover:shadow-glow"
+            type="button"
+          >
+            Buscar
+          </button>
+        </div>
+
+        <button
+          id="mobileMenuButton"
+          type="button"
+          class="inline-flex items-center justify-center rounded-md p-2 text-cineGray transition hover:bg-white/10 hover:text-white md:hidden"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <div class="hidden items-center gap-5 md:flex">
+          <a href="#inicio" class="text-sm text-cineGray transition hover:text-white">Inicio</a>
+          <a href="#peliculas" class="text-sm text-cineGray transition hover:text-white">Peliculas</a>
+          <a href="#series" class="text-sm text-cineGray transition hover:text-white">Series</a>
+          <a href="#tendencias" class="text-sm text-cineGray transition hover:text-white">Tendencias</a>
+          <button
+            id="userAvatarButton"
+            class="h-9 w-9 rounded-full border border-white/20 bg-gradient-to-br from-zinc-700 to-zinc-900 text-sm font-semibold transition hover:scale-105 hover:border-cineRed"
+            type="button"
+          >
+            U
+          </button>
+        </div>
+      </nav>
+
+      <!-- Menu movil -->
+      <div id="mobileMenu" class="hidden border-t border-white/10 bg-cineDark/95 px-4 py-4 md:hidden" role="navigation" aria-label="Menu movil">
+        <div class="mb-4 flex items-center gap-2">
+          <input
+            id="mobileSearchInput"
+            type="text"
+            placeholder="Buscar contenido..."
+            class="w-full rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm outline-none transition focus:border-cineRed"
+          />
+          <button
+            id="mobileSearchButton"
+            type="button"
+            class="rounded-full bg-cineRed px-4 py-2 text-sm font-semibold transition hover:bg-red-600"
+          >
+            Ir
+          </button>
+        </div>
+        <div class="flex flex-col gap-3 text-sm">
+          <a href="#inicio" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Inicio</a>
+          <a href="#peliculas" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Peliculas</a>
+          <a href="#series" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Series</a>
+          <a href="#tendencias" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Tendencias</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="inicio" class="relative">
+      <!-- Hero section cinematografica -->
+      <section id="heroSection" class="hero-background relative flex min-h-screen items-end overflow-hidden pt-24">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent"></div>
+        <div class="relative mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+          <div class="max-w-2xl opacity-0 animate-fadeUp [animation-delay:140ms]">
+            <p class="mb-4 text-sm uppercase tracking-[0.24em] text-cineGray">Descubre lo mejor del cine y streaming</p>
+            <h1 class="text-4xl font-extrabold leading-tight md:text-6xl">
+              Explora peliculas y series con estilo
+              <span class="text-cineRed">premium</span>
+            </h1>
+            <p class="mt-5 max-w-xl text-base text-cineGray md:text-lg">
+              CineFlick conecta con TMDB para mostrar tendencias, recomendaciones y busquedas inteligentes en una
+              experiencia visual cinematografica.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <button
+                id="heroExploreButton"
+                type="button"
+                class="rounded-full bg-cineRed px-6 py-3 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 hover:scale-105 hover:bg-red-600 hover:shadow-glow"
+              >
+                Explorar ahora
+              </button>
+              <button
+                id="heroTrendingButton"
+                type="button"
+                class="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-cineRed hover:bg-white/15"
+              >
+                Ver tendencias
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seccion Trending Now -->
+      <section id="tendencias" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p class="text-xs uppercase tracking-[0.2em] text-cineGray">Top semanal</p>
+            <h2 class="text-3xl font-bold md:text-4xl">Trending Movies</h2>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cineBlack to-transparent"></div>
+          <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cineBlack to-transparent"></div>
+          <button type="button" data-carousel-prev="trendingGrid" class="carousel-arrow absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">‹</button>
+          <button type="button" data-carousel-next="trendingGrid" class="carousel-arrow absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">›</button>
+          <div id="trendingGrid" class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-3" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- Seccion categorias -->
+      <section id="categorias" class="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+        <h2 class="mb-5 text-2xl font-bold md:text-3xl">Categorias</h2>
+        <div id="categoryChips" class="flex flex-wrap gap-3">
+          <button class="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm transition hover:border-cineRed hover:text-cineRed">
+            Accion
+          </button>
+          <button class="rounded-full border border-cineRed bg-cineRed/20 px-5 py-2 text-sm text-cineRed transition hover:bg-cineRed/30">
+            Ciencia ficcion
+          </button>
+          <button class="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm transition hover:border-cineRed hover:text-cineRed">
+            Terror
+          </button>
+          <button class="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm transition hover:border-cineRed hover:text-cineRed">
+            Drama
+          </button>
+          <button class="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm transition hover:border-cineRed hover:text-cineRed">
+            Comedia
+          </button>
+          <button class="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm transition hover:border-cineRed hover:text-cineRed">
+            Animacion
+          </button>
+        </div>
+      </section>
+
+      <!-- Seccion busqueda y filtros -->
+      <section id="peliculas" class="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+        <div class="rounded-2xl border border-white/10 bg-cineDark/90 p-5 shadow-lg backdrop-blur-md sm:p-6">
+          <div class="mb-5 flex items-center justify-between gap-4">
+            <h2 class="text-2xl font-bold md:text-3xl">Busqueda y filtros avanzados</h2>
+            <button
+              id="clearFiltersButton"
+              type="button"
+              class="rounded-full border border-white/20 px-4 py-2 text-xs uppercase tracking-[0.14em] text-cineGray transition hover:border-cineRed hover:text-white"
+            >
+              Limpiar
+            </button>
+          </div>
+
+          <form id="filtersForm" class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <label for="genreFilter" class="mb-2 block text-xs uppercase tracking-[0.15em] text-cineGray">Genero</label>
+              <select
+                id="genreFilter"
+                class="w-full rounded-lg border border-white/15 bg-cineBlack px-4 py-3 text-sm outline-none transition focus:border-cineRed focus:ring-2 focus:ring-cineRed/25"
+              >
+                <option value="">Todos</option>
+                <option value="28">Accion</option>
+                <option value="878">Ciencia ficcion</option>
+                <option value="27">Terror</option>
+                <option value="18">Drama</option>
+                <option value="35">Comedia</option>
+                <option value="16">Animacion</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="yearFilter" class="mb-2 block text-xs uppercase tracking-[0.15em] text-cineGray">Ano</label>
+              <input
+                id="yearFilter"
+                type="number"
+                min="1900"
+                max="2099"
+                placeholder="Ej: 2026"
+                class="w-full rounded-lg border border-white/15 bg-cineBlack px-4 py-3 text-sm outline-none transition focus:border-cineRed focus:ring-2 focus:ring-cineRed/25"
+              />
+            </div>
+
+            <div>
+              <label for="sortByFilter" class="mb-2 block text-xs uppercase tracking-[0.15em] text-cineGray">Popularidad</label>
+              <select
+                id="sortByFilter"
+                class="w-full rounded-lg border border-white/15 bg-cineBlack px-4 py-3 text-sm outline-none transition focus:border-cineRed focus:ring-2 focus:ring-cineRed/25"
+              >
+                <option value="popularity.desc">Mas populares</option>
+                <option value="popularity.asc">Menos populares</option>
+                <option value="release_date.desc">Mas recientes</option>
+                <option value="release_date.asc">Mas antiguas</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ratingFilter" class="mb-2 block text-xs uppercase tracking-[0.15em] text-cineGray">Rating minimo</label>
+              <select
+                id="ratingFilter"
+                class="w-full rounded-lg border border-white/15 bg-cineBlack px-4 py-3 text-sm outline-none transition focus:border-cineRed focus:ring-2 focus:ring-cineRed/25"
+              >
+                <option value="">Cualquiera</option>
+                <option value="9">9+</option>
+                <option value="8">8+</option>
+                <option value="7">7+</option>
+                <option value="6">6+</option>
+                <option value="5">5+</option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Contenedor principal dinamico de peliculas -->
+      <section id="series" class="mx-auto max-w-7xl space-y-12 px-4 pb-16 sm:px-6 lg:px-8">
+        <div>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <h2 class="text-2xl font-bold md:text-3xl">Catalogo recomendado</h2>
+            <p id="resultsCount" class="text-sm text-cineGray">0 resultados</p>
+          </div>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cineBlack to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cineBlack to-transparent"></div>
+            <button type="button" data-carousel-prev="moviesGrid" class="carousel-arrow absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">‹</button>
+            <button type="button" data-carousel-next="moviesGrid" class="carousel-arrow absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">›</button>
+            <div id="moviesGrid" class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-3" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <h2 class="text-2xl font-bold md:text-3xl">Proximamente</h2>
+          </div>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cineBlack to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cineBlack to-transparent"></div>
+            <button type="button" data-carousel-prev="upcomingGrid" class="carousel-arrow absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">‹</button>
+            <button type="button" data-carousel-next="upcomingGrid" class="carousel-arrow absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">›</button>
+            <div id="upcomingGrid" class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-3" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <h2 class="text-2xl font-bold md:text-3xl">Top Rated</h2>
+          </div>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cineBlack to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cineBlack to-transparent"></div>
+            <button type="button" data-carousel-prev="topRatedGrid" class="carousel-arrow absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">‹</button>
+            <button type="button" data-carousel-next="topRatedGrid" class="carousel-arrow absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">›</button>
+            <div id="topRatedGrid" class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-3" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal de detalles -->
+    <div
+      id="movieModal"
+      class="pointer-events-none fixed inset-0 z-[90] flex items-center justify-center bg-black/75 px-4 opacity-0 backdrop-blur-sm transition duration-300"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div
+        id="movieModalPanel"
+        class="relative w-full max-w-4xl scale-95 overflow-hidden rounded-2xl border border-white/10 bg-cineDark shadow-2xl transition duration-300"
+        role="document"
+      >
+        <button
+          id="closeModalButton"
+          type="button"
+          class="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/60 text-cineGray transition hover:border-cineRed hover:text-white"
+          aria-label="Cerrar modal"
+        >
+          ✕
+        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <img id="modalPoster" src="" alt="Poster seleccionado" class="h-80 w-full object-cover md:h-full" />
+          <div class="space-y-4 p-6">
+            <h3 id="modalTitle" class="text-2xl font-bold md:text-3xl">Cargando titulo...</h3>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <p><span class="text-cineGray">Rating:</span> <span id="modalRating">-</span></p>
+              <p><span class="text-cineGray">Estreno:</span> <span id="modalReleaseDate">-</span></p>
+              <p><span class="text-cineGray">Generos:</span> <span id="modalGenres">-</span></p>
+              <p><span class="text-cineGray">Idioma:</span> <span id="modalLanguage">-</span></p>
+              <p class="col-span-2"><span class="text-cineGray">Popularidad:</span> <span id="modalPopularity">-</span></p>
+            </div>
+            <p id="modalOverview" class="text-sm leading-relaxed text-cineGray md:text-base">Cargando sinopsis...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-cineDark/80">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-8 text-sm text-cineGray sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <p>© 2026 CineFlick. Inspirado en plataformas de streaming premium.</p>
+        <p id="apiStatus" class="text-xs uppercase tracking-[0.16em]">Estado API TMDB: pendiente de conexion</p>
+      </div>
+    </footer>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>
