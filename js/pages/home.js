@@ -12,10 +12,10 @@ import {
   state,
   tmdbFetch,
 } from "../api.js";
-import { bindCarouselControls, restartAllCarousels } from "../carousels.js";
-import { mountLayout, bindSharedLayout } from "../layout.js";
-import { userProfile, updateMovieList } from "../profile.js";
-import { openMovieDetails, openTrailerModal, renderCollectionLoading, renderMovieCollection } from "../ui.js";
+import { bindCarouselControls, restartAllCarousels } from "../features/carousels.js";
+import { mountLayout, bindSharedLayout } from "../features/layout.js";
+import { userProfile, updateMovieList } from "../features/profile.js";
+import { openMovieDetails, openTrailerModal, renderCollectionLoading, renderMovieCollection } from "../features/ui.js";
 
 const renderGenres = async () => {
   const container = document.getElementById("genres-container");

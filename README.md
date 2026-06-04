@@ -34,3 +34,10 @@ Configura `backend/.env` con tus credenciales MySQL y tu API key de TMDB. El esq
 - Favoritos guardados en el navegador.
 - Login, perfil y sincronizacion con MySQL cuando hay sesion.
 - Carruseles con tendencias, recomendados, proximamente y top rated.
+
+## Estructura Frontend
+
+- `js/core/`: utilidades base, API TMDB y API del backend.
+- `js/features/`: layout, UI, carruseles, busqueda, perfil y social.
+- `js/pages/`: entradas de cada pagina HTML.
+- `js/*.js`: archivos puente para compatibilidad con rutas antiguas.

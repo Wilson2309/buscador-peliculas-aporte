@@ -7,10 +7,10 @@ import {
   setApiStatus,
   sortMovies,
   tmdbFetch,
-} from "../api.js";
-import { bindCarouselControls, restartAllCarousels } from "../carousels.js";
-import { bindSharedLayout, mountLayout } from "../layout.js";
-import { renderCollectionLoading, renderMovieCollection } from "../ui.js";
+} from "../core/api.js";
+import { bindCarouselControls, restartAllCarousels } from "../features/carousels.js";
+import { bindSharedLayout, mountLayout } from "../features/layout.js";
+import { renderCollectionLoading, renderMovieCollection } from "../features/ui.js";
 
 const pageConfigs = {
   peliculas: {

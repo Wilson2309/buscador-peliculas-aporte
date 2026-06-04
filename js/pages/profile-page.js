@@ -1,8 +1,8 @@
-import { escapeHtml, getMovieDetails, hideLoader, loadGenresData, setApiStatus } from "../api.js";
-import { getMyRatings, getMyReviews, getStoredUser, isLoggedIn, loginUser, logoutUser, registerUser } from "../backendApi.js";
-import { bindSharedLayout, mountLayout, updateNavbarAuth } from "../layout.js";
-import { bindProfilePanel, createDefaultUserProfile, loadBackendProfile, loadProfile, renderProfile, showToast, syncUserProfile } from "../profile.js";
-import { openMovieDetails } from "../ui.js";
+import { escapeHtml, getMovieDetails, hideLoader, loadGenresData, setApiStatus } from "../core/api.js";
+import { getMyRatings, getMyReviews, getStoredUser, isLoggedIn, loginUser, logoutUser, registerUser } from "../core/backendApi.js";
+import { bindSharedLayout, mountLayout, updateNavbarAuth } from "../features/layout.js";
+import { bindProfilePanel, createDefaultUserProfile, loadBackendProfile, loadProfile, renderProfile, showToast, syncUserProfile } from "../features/profile.js";
+import { openMovieDetails } from "../features/ui.js";
 
 let authMode = new URLSearchParams(location.search).get("auth") === "register" ? "register" : "login";
 

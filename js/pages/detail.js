@@ -1,9 +1,9 @@
-import { getMovieDetails, hideLoader, loadGenresData, setApiStatus, state } from "../api.js";
-import { bindCarouselControls } from "../carousels.js";
-import { bindSharedLayout, mountLayout } from "../layout.js";
-import { addToHistory } from "../profile.js";
-import { loadSocialSections } from "../social.js";
-import { renderMovieDetailMarkup } from "../ui.js";
+import { getMovieDetails, hideLoader, loadGenresData, setApiStatus, state } from "../core/api.js";
+import { bindCarouselControls } from "../features/carousels.js";
+import { bindSharedLayout, mountLayout } from "../features/layout.js";
+import { addToHistory } from "../features/profile.js";
+import { loadSocialSections } from "../features/social.js";
+import { renderMovieDetailMarkup } from "../features/ui.js";
 
 const getMovieId = () => new URLSearchParams(location.search).get("id");
 
