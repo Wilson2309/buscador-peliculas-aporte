@@ -96,7 +96,7 @@ const loaderMarkup = `
 const headerMarkup = `
   <header id="mainNavbar" class="fixed top-0 z-50 w-full border-b border-white/10 bg-cineBlack/70 backdrop-blur-md transition-all duration-300">
     <nav class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
-      <a href="./index.html" class="shrink-0 text-xl font-bold tracking-wide md:text-2xl">
+      <a href="/index.html" class="shrink-0 text-xl font-bold tracking-wide md:text-2xl">
         <span class="text-cineRed">&#127916;</span> CineFlick
       </a>
       <div class="search-shell hidden flex-1 items-center gap-3 md:flex">
@@ -111,15 +111,15 @@ const headerMarkup = `
         </svg>
       </button>
       <div class="hidden items-center gap-5 md:flex">
-        <a href="./index.html" class="text-sm text-cineGray transition hover:text-white">Inicio</a>
-        <a href="./peliculas.html" class="text-sm text-cineGray transition hover:text-white">Peliculas</a>
-        <a href="./tendencias.html" class="text-sm text-cineGray transition hover:text-white">Tendencias</a>
-        <a href="./proximamente.html" class="text-sm text-cineGray transition hover:text-white">Proximamente</a>
-        <a href="./top-rated.html" class="text-sm text-cineGray transition hover:text-white">Top Rated</a>
-        <a href="./perfil.html" class="text-sm text-cineGray transition hover:text-white">Perfil</a>
+        <a href="/index.html" class="text-sm text-cineGray transition hover:text-white">Inicio</a>
+        <a href="/pages/peliculas.html" class="text-sm text-cineGray transition hover:text-white">Peliculas</a>
+        <a href="/pages/tendencias.html" class="text-sm text-cineGray transition hover:text-white">Tendencias</a>
+        <a href="/pages/proximamente.html" class="text-sm text-cineGray transition hover:text-white">Proximamente</a>
+        <a href="/pages/top-rated.html" class="text-sm text-cineGray transition hover:text-white">Top Rated</a>
+        <a href="/pages/perfil.html" class="text-sm text-cineGray transition hover:text-white">Perfil</a>
         <div id="navbarAuthActions" class="flex items-center gap-2">
-          <a id="navbarLoginLink" href="./perfil.html" class="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-cineGray transition hover:border-cineRed hover:text-white">Login</a>
-          <a id="navbarRegisterLink" href="./perfil.html?auth=register" class="rounded-full bg-cineRed px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-red-700">Registro</a>
+          <a id="navbarLoginLink" href="/pages/perfil.html" class="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-cineGray transition hover:border-cineRed hover:text-white">Login</a>
+          <a id="navbarRegisterLink" href="/pages/perfil.html?auth=register" class="rounded-full bg-cineRed px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-red-700">Registro</a>
         </div>
         <button id="userAvatarButton" class="hidden h-9 w-9 rounded-full border border-white/20 bg-gradient-to-br from-zinc-700 to-zinc-900 text-sm font-semibold transition hover:scale-105 hover:border-cineRed" type="button" aria-haspopup="dialog" aria-controls="profilePanel">U</button>
         <button id="navbarLogoutButton" class="hidden rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-cineGray transition hover:border-cineRed hover:text-white" type="button">Salir</button>
@@ -134,14 +134,14 @@ const headerMarkup = `
         <button id="mobileSearchButton" type="button" class="rounded-full bg-cineRed px-4 py-2 text-sm font-semibold transition hover:bg-red-600">Ir</button>
       </div>
       <div class="flex flex-col gap-3 text-sm">
-        <a href="./index.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Inicio</a>
-        <a href="./peliculas.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Peliculas</a>
-        <a href="./tendencias.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Tendencias</a>
-        <a href="./proximamente.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Proximamente</a>
-        <a href="./top-rated.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Top Rated</a>
-        <a href="./perfil.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Perfil</a>
-        <a id="mobileLoginLink" href="./perfil.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Login</a>
-        <a id="mobileRegisterLink" href="./perfil.html?auth=register" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Registro</a>
+        <a href="/index.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Inicio</a>
+        <a href="/pages/peliculas.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Peliculas</a>
+        <a href="/pages/tendencias.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Tendencias</a>
+        <a href="/pages/proximamente.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Proximamente</a>
+        <a href="/pages/top-rated.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Top Rated</a>
+        <a href="/pages/perfil.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Perfil</a>
+        <a id="mobileLoginLink" href="/pages/perfil.html" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Login</a>
+        <a id="mobileRegisterLink" href="/pages/perfil.html?auth=register" class="rounded-md px-2 py-1.5 text-cineGray transition hover:bg-white/5 hover:text-white">Registro</a>
         <button id="mobileLogoutButton" type="button" class="hidden rounded-md px-2 py-1.5 text-left text-cineGray transition hover:bg-white/5 hover:text-white">Salir</button>
       </div>
     </div>
@@ -230,17 +230,17 @@ export const bindSharedLayout = ({ profilePanel = true } = {}) => {
   window.addEventListener("scroll", updateNavbarScroll, { passive: true });
   document.getElementById("navbarLogoutButton")?.addEventListener("click", () => {
     logoutUser();
-    location.href = "./perfil.html";
+    location.href = "/pages/perfil.html";
   });
   document.getElementById("mobileLogoutButton")?.addEventListener("click", () => {
     logoutUser();
-    location.href = "./perfil.html";
+    location.href = "/pages/perfil.html";
   });
 
   bindGlobalSearch();
   bindMovieGridInteractions();
   if (profilePanel) initProfile({ openMovieDetails });
-  else document.getElementById("userAvatarButton")?.addEventListener("click", () => (location.href = "./perfil.html"));
+  else document.getElementById("userAvatarButton")?.addEventListener("click", () => (location.href = "/pages/perfil.html"));
   updateNavbarAuth();
   document.addEventListener("cineflick:auth-changed", updateNavbarAuth);
   setApiStatus("Estado API/backend: conectado");

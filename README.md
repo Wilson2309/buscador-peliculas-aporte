@@ -37,7 +37,10 @@ Configura `backend/.env` con tus credenciales MySQL y tu API key de TMDB. El esq
 
 ## Estructura Frontend
 
+- `index.html`: entrada principal del sitio.
+- `pages/`: paginas HTML secundarias como catalogo, detalle, perfil y categorias.
+- `css/`: estilos globales de CineFlick.
 - `js/core/`: utilidades base, API TMDB y API del backend.
 - `js/features/`: layout, UI, carruseles, busqueda, perfil y social.
-- `js/pages/`: entradas de cada pagina HTML.
+- `js/pages/`: scripts de entrada para cada pagina HTML.
 - `js/*.js`: archivos puente para compatibilidad con rutas antiguas.

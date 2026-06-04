@@ -351,7 +351,7 @@ export const bindProfilePanel = ({ openMovieDetails } = {}) => {
 
   const openProfilePanel = () => {
     if (!profilePanel || !profilePanelSheet) {
-      location.href = "./perfil.html";
+      location.href = "/pages/perfil.html";
       return;
     }
     profilePanel.classList.add("profile-open");
@@ -388,7 +388,7 @@ export const bindProfilePanel = ({ openMovieDetails } = {}) => {
 
     if (actionButton.dataset.profileAction === "open") {
       if (openMovieDetails) openMovieDetails(movieId);
-      else location.href = `./detalle.html?id=${movieId}`;
+      else location.href = `/pages/detalle.html?id=${movieId}`;
     }
     if (actionButton.dataset.profileAction === "remove" && listName) removeFromMovieList(listName, movieId);
     if (actionButton.dataset.profileAction === "move-watch-later") moveFavoriteToWatchLater(movieId);

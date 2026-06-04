@@ -1,4 +1,12 @@
 {
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/detalle.html", "destination": "/pages/detalle.html" },
+    { "source": "/peliculas.html", "destination": "/pages/peliculas.html" },
+    { "source": "/perfil.html", "destination": "/pages/perfil.html" },
+    { "source": "/proximamente.html", "destination": "/pages/proximamente.html" },
+    { "source": "/tendencias.html", "destination": "/pages/tendencias.html" },
+    { "source": "/top-rated.html", "destination": "/pages/top-rated.html" }
+  ]
 }

@@ -3,23 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CineFlick | Top Rated</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>CineFlick | Proximamente</title>
+    <link rel="stylesheet" href="/css/style.css" />
     <script>
       window.tailwind = window.tailwind || {};
       window.tailwind.config = { theme: { extend: { colors: { cineBlack: "#0b0b0b", cineDark: "#141414", cineRed: "#e50914", cineGray: "#b3b3b3" }, boxShadow: { glow: "0 0 25px rgba(229, 9, 20, 0.35)" }, keyframes: { pulseSoft: { "0%, 100%": { opacity: "0.4" }, "50%": { opacity: "1" } }, spinSlow: { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } } }, animation: { pulseSoft: "pulseSoft 2s ease-in-out infinite", spinSlow: "spinSlow 1s linear infinite" } } } };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-cineBlack text-white antialiased selection:bg-cineRed selection:text-white" data-page="top-rated">
+  <body class="bg-cineBlack text-white antialiased selection:bg-cineRed selection:text-white" data-page="proximamente">
     <main class="relative pt-28">
       <section class="mx-auto max-w-7xl px-4 pb-10 pt-10 sm:px-6 lg:px-8">
-        <p id="pageKicker" class="text-xs uppercase tracking-[0.2em] text-cineGray">Top Rated</p>
-        <h1 id="pageTitle" class="mt-2 text-4xl font-black md:text-6xl">Mejor calificadas</h1>
+        <p id="pageKicker" class="text-xs uppercase tracking-[0.2em] text-cineGray">Muy pronto</p>
+        <h1 id="pageTitle" class="mt-2 text-4xl font-black md:text-6xl">Proximos estrenos</h1>
       </section>
       <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <div class="section-heading mb-6 flex items-center justify-between gap-4">
-          <h2 class="text-2xl font-bold md:text-3xl">Peliculas mejor valoradas</h2>
+          <h2 class="text-2xl font-bold md:text-3xl">Estrenos anunciados</h2>
           <p id="resultsCount" class="text-sm text-cineGray">0 resultados</p>
         </div>
         <div class="relative">
@@ -31,6 +31,6 @@
         </div>
       </section>
     </main>
-    <script type="module" src="./js/pages/movies.js"></script>
+    <script type="module" src="/js/pages/movies.js"></script>
   </body>
 </html>

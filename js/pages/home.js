@@ -23,8 +23,8 @@ const renderGenres = async () => {
   try {
     const genres = await loadGenresData();
     container.innerHTML = `
-      <a class="genre-chip is-active" href="./peliculas.html">Todos</a>
-      ${genres.map((genre) => `<a class="genre-chip" href="./peliculas.html?genre=${genre.id}">${genre.name}</a>`).join("")}
+      <a class="genre-chip is-active" href="/pages/peliculas.html">Todos</a>
+      ${genres.map((genre) => `<a class="genre-chip" href="/pages/peliculas.html?genre=${genre.id}">${genre.name}</a>`).join("")}
     `;
   } catch {
     container.innerHTML = "";
@@ -204,7 +204,7 @@ const bindHero = () => {
   });
   document.getElementById("featuredPlayButton")?.addEventListener("click", () => {
     const movieId = document.getElementById("featuredPlayButton").dataset.movieId;
-    if (movieId) location.href = `./detalle.html?id=${movieId}`;
+    if (movieId) location.href = `/pages/detalle.html?id=${movieId}`;
   });
   document.getElementById("featuredTrailerButton")?.addEventListener("click", () => {
     const trailer = findOfficialTrailer(state.currentFeaturedDetails?.videos?.results || []);
@@ -216,7 +216,7 @@ const bindHero = () => {
     if (state.currentFeaturedDetails) updateMovieList("favorites", state.currentFeaturedDetails);
   });
   document.getElementById("heroTrendingButton")?.addEventListener("click", () => {
-    location.href = "./tendencias.html";
+    location.href = "/pages/tendencias.html";
   });
   document.getElementById("heroSection")?.addEventListener("mouseenter", () => window.clearInterval(state.featuredTimerId));
   document.getElementById("heroSection")?.addEventListener("mouseleave", startFeaturedRotation);

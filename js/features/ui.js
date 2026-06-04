@@ -47,7 +47,7 @@ export const createMovieCard = (movie) => {
   card.tabIndex = 0;
   card.dataset.movieId = snapshot.id;
   card.innerHTML = `
-    <a class="tmdb-card-button tmdb-card-main" href="./detalle.html?id=${snapshot.id}" aria-label="Ver detalles de ${escapeHtml(snapshot.title)}">
+    <a class="tmdb-card-button tmdb-card-main" href="/pages/detalle.html?id=${snapshot.id}" aria-label="Ver detalles de ${escapeHtml(snapshot.title)}">
       <div class="tmdb-poster-wrap">
         <img
           src="${buildImageUrl(snapshot.poster_path, "w342")}"
@@ -186,7 +186,7 @@ export const renderSearchSuggestions = (results = []) => {
     .slice(0, 5)
     .map(
       (movie) => `
-        <a class="search-suggestion" href="./detalle.html?id=${movie.id}" data-suggestion-id="${movie.id}">
+        <a class="search-suggestion" href="/pages/detalle.html?id=${movie.id}" data-suggestion-id="${movie.id}">
           <img src="${buildImageUrl(movie.poster_path, "w185")}" alt="${escapeHtml(movie.title)}" loading="lazy" decoding="async" />
           <span>
             <strong>${escapeHtml(movie.title)}</strong>
@@ -245,7 +245,7 @@ export const renderModalLoading = () => {
 };
 
 export const createSmallMovieLink = (movie) => `
-  <a class="tmdb-card-button" href="./detalle.html?id=${movie.id}">
+  <a class="tmdb-card-button" href="/pages/detalle.html?id=${movie.id}">
     <img class="tmdb-still" src="${buildImageUrl(movie.backdrop_path || movie.poster_path, "w342")}" alt="${escapeHtml(movie.title)}" loading="lazy" decoding="async" />
     <strong>${escapeHtml(movie.title)}</strong>
   </a>
@@ -396,7 +396,7 @@ export const handleMovieInteraction = async (event) => {
       const details = await getMovieDetails(movie.id);
       const trailer = findOfficialTrailer(details.videos?.results || []);
       if (trailer) openTrailerModal(details, trailer);
-      else location.href = `./detalle.html?id=${movie.id}`;
+      else location.href = `/pages/detalle.html?id=${movie.id}`;
     }
   }
 };
