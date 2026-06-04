@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineFlick | Top Rated</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script>
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = { theme: { extend: { colors: { cineBlack: "#0b0b0b", cineDark: "#141414", cineRed: "#e50914", cineGray: "#b3b3b3" }, boxShadow: { glow: "0 0 25px rgba(229, 9, 20, 0.35)" }, keyframes: { pulseSoft: { "0%, 100%": { opacity: "0.4" }, "50%": { opacity: "1" } }, spinSlow: { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } } }, animation: { pulseSoft: "pulseSoft 2s ease-in-out infinite", spinSlow: "spinSlow 1s linear infinite" } } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-cineBlack text-white antialiased selection:bg-cineRed selection:text-white" data-page="top-rated">
+    <main class="relative pt-28">
+      <section class="mx-auto max-w-7xl px-4 pb-10 pt-10 sm:px-6 lg:px-8">
+        <p id="pageKicker" class="text-xs uppercase tracking-[0.2em] text-cineGray">Top Rated</p>
+        <h1 id="pageTitle" class="mt-2 text-4xl font-black md:text-6xl">Mejor calificadas</h1>
+      </section>
+      <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        <div class="section-heading mb-6 flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-bold md:text-3xl">Peliculas mejor valoradas</h2>
+          <p id="resultsCount" class="text-sm text-cineGray">0 resultados</p>
+        </div>
+        <div class="relative">
+          <div class="carousel-fade left"></div>
+          <div class="carousel-fade right"></div>
+          <button type="button" data-carousel-prev="movies-grid" class="carousel-arrow absolute left-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">&lsaquo;</button>
+          <button type="button" data-carousel-next="movies-grid" class="carousel-arrow absolute right-2 top-1/2 z-20 hidden -translate-y-1/2 md:inline-flex">&rsaquo;</button>
+          <div id="movies-grid" class="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-3" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./js/pages/movies.js"></script>
+  </body>
+</html>

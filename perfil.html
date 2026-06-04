@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineFlick | Perfil</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script>
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = { theme: { extend: { colors: { cineBlack: "#0b0b0b", cineDark: "#141414", cineRed: "#e50914", cineGray: "#b3b3b3" }, boxShadow: { glow: "0 0 25px rgba(229, 9, 20, 0.35)" }, keyframes: { pulseSoft: { "0%, 100%": { opacity: "0.4" }, "50%": { opacity: "1" } }, spinSlow: { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } } }, animation: { pulseSoft: "pulseSoft 2s ease-in-out infinite", spinSlow: "spinSlow 1s linear infinite" } } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-cineBlack text-white antialiased selection:bg-cineRed selection:text-white" data-page="profile">
+    <main class="relative pt-28">
+      <section class="mx-auto max-w-5xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+        <p class="text-xs uppercase tracking-[0.2em] text-cineGray">Tu espacio CineFlick</p>
+        <h1 class="mt-2 text-4xl font-black md:text-6xl">Perfil</h1>
+        <div class="profile-page-panel mt-8 rounded-2xl border border-white/10 bg-cineDark/90 p-5 shadow-2xl sm:p-8">
+          <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.16em] text-cineGray">Cuenta</p>
+              <h2 id="authTitle" class="mt-2 text-2xl font-bold">Iniciar sesion</h2>
+              <p id="authStatus" class="mt-2 text-sm text-cineGray">Conecta tu perfil para guardar actividad en MySQL.</p>
+            </div>
+            <div class="profile-actions">
+              <button type="button" data-auth-mode="login">Login</button>
+              <button type="button" data-auth-mode="register">Registro</button>
+              <button id="logoutButton" type="button" hidden>Cerrar sesion</button>
+            </div>
+          </div>
+          <form id="authForm" class="mt-5 grid gap-3 md:grid-cols-3">
+            <input id="authNameInput" class="profile-input" type="text" placeholder="Nombre" autocomplete="name" hidden />
+            <input id="authEmailInput" class="profile-input" type="email" placeholder="Email" autocomplete="email" required />
+            <input id="authPasswordInput" class="profile-input" type="password" placeholder="Password" autocomplete="current-password" required minlength="6" />
+            <button id="authSubmitButton" class="rounded-xl bg-cineRed px-5 py-3 font-bold text-white transition hover:bg-red-700" type="submit">Entrar</button>
+          </form>
+        </div>
+        <div class="profile-page-panel mt-8 rounded-2xl border border-white/10 bg-cineDark/90 p-5 shadow-2xl sm:p-8">
+          <div class="profile-dashboard space-y-6">
+            <div class="flex items-center gap-4">
+              <div id="profileAvatar" class="profile-avatar flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cineRed to-red-900 text-2xl font-bold">U</div>
+              <div class="min-w-0 flex-1">
+                <input id="profileNameInput" class="profile-input" type="text" value="Invitado" aria-label="Nombre de usuario" />
+                <p id="profileEmailText" class="text-sm text-cineGray">Inicia sesion para sincronizar</p>
+                <input id="profileAvatarUrlInput" class="profile-input mt-3" type="url" placeholder="URL del avatar" aria-label="URL del avatar" />
+                <label class="profile-file-label">Cambiar avatar <input id="profileAvatarInput" type="file" accept="image/*" hidden /></label>
+              </div>
+            </div>
+            <textarea id="profileBioInput" class="profile-input min-h-24 resize-none" placeholder="Bio" aria-label="Bio"></textarea>
+            <div class="profile-stats-grid grid grid-cols-2 gap-3 md:grid-cols-4">
+              <div class="profile-stat-card rounded-xl border border-white/10 bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.16em] text-cineGray">Favoritos</p><p id="favoritesCount" class="mt-2 text-2xl font-bold">0</p></div>
+              <div class="profile-stat-card rounded-xl border border-white/10 bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.16em] text-cineGray">Pendientes</p><p id="watchLaterCount" class="mt-2 text-2xl font-bold">0</p></div>
+              <div class="profile-stat-card rounded-xl border border-white/10 bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.16em] text-cineGray">Vistas</p><p id="historyCount" class="mt-2 text-2xl font-bold">0</p></div>
+              <div class="profile-stat-card rounded-xl border border-white/10 bg-white/5 p-4"><p class="text-xs uppercase tracking-[0.16em] text-cineGray">Promedio fav</p><p id="avgRatingStat" class="mt-2 text-sm font-semibold text-white">Sin datos</p></div>
+            </div>
+            <div class="profile-actions">
+              <button id="editProfileButton" type="button">Editar perfil</button>
+              <button id="saveProfileButton" type="button" hidden>Guardar</button>
+              <button id="cancelProfileEditButton" type="button" hidden>Cancelar</button>
+              <button id="clearHistoryButton" type="button">Limpiar historial</button>
+              <button id="exportFavoritesButton" type="button">Exportar JSON</button>
+              <button id="importFavoritesButton" type="button">Importar JSON</button>
+              <input id="importFavoritesInput" type="file" accept="application/json" hidden />
+            </div>
+            <div class="grid gap-6 lg:grid-cols-3">
+              <div><h4 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cineGray">Favoritos recientes</h4><div id="favoriteList" class="space-y-3"></div></div>
+              <div><h4 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cineGray">Ver mas tarde</h4><div id="watchLaterList" class="space-y-3"></div></div>
+              <div><h4 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cineGray">Historial reciente</h4><div id="historyList" class="space-y-3"></div></div>
+            </div>
+            <div class="grid gap-6 lg:grid-cols-2">
+              <div><h4 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cineGray">Mis opiniones</h4><div id="myReviewsList" class="space-y-3"></div></div>
+              <div><h4 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-cineGray">Mis calificaciones</h4><div id="myRatingsList" class="space-y-3"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./js/pages/profile-page.js"></script>
+  </body>
+</html>

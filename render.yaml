@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: cineflick-wilson2309-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: TMDB_API_KEY
+        sync: false
+      - key: TMDB_BASE_URL
+        value: https://api.themoviedb.org/3
+      - key: TMDB_LANGUAGE
+        value: es-ES
+      - key: TMDB_REGION
+        value: US
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 3306
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: cineflick
+      - key: DB_SSL
+        sync: false
+      - key: DB_SSL_REJECT_UNAUTHORIZED
+        sync: false
+      - key: DB_SSL_CA
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
