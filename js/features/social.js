@@ -8,7 +8,7 @@ import {
   isLoggedIn,
   saveRating,
   updateReview,
-} from "./backendApi.js";
+} from "../core/backendApi.js";
 import { escapeHtml, getYear } from "../core/api.js";
 import { showToast } from "./profile.js";
 

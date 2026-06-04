@@ -11,7 +11,7 @@ import {
   setApiStatus,
   state,
   tmdbFetch,
-} from "../api.js";
+} from "../core/api.js";
 import { bindCarouselControls, restartAllCarousels } from "../features/carousels.js";
 import { mountLayout, bindSharedLayout } from "../features/layout.js";
 import { userProfile, updateMovieList } from "../features/profile.js";
